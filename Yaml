@@ -1,0 +1,28 @@
+alias: synch light clean
+description: ""
+triggers:
+  - entity_id: input_button.reddit_helper
+    trigger: state
+conditions: []
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: light.front_light_light_2
+            state: "off"
+        sequence:
+          - target:
+              entity_id: light.back_light_light
+            action: light.turn_off
+            data: {}
+      - conditions:
+          - condition: state
+            entity_id: light.front_light_light_2
+            state: "on"
+        sequence:
+          - target:
+              entity_id: light.back_light_light
+            data:
+              rgb_color: "{{ state_attr(\"light.front_light_light_2\", \"rgb_color\") }}"
+              brightness: "{{ state_attr(\"light.front_light_light_2\", \"brightness\") }}"
+            action: light.turn_on
