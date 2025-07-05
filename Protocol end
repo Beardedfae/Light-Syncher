@@ -1,0 +1,23 @@
+alias: Protocol Protocol Completed
+triggers:
+  - entity_id: input_boolean.protocol_protocol
+    to: "off"
+    trigger: state
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: light.back_light_light
+            state: "off"
+        sequence:
+          - target:
+              entity_id: light.front_light_light_2
+            action: light.turn_off
+            data: {}
+    default:
+      - data:
+          entity_id: light.front_light_light_2
+          hs_color: "{{ state_attr('light.back_light_light', 'hs_color') }}"
+          brightness: "{{ state_attr('light.back_light_light', 'brightness') }}"
+        action: light.turn_on
+mode: single
