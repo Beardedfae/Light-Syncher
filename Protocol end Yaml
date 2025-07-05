@@ -1,4 +1,4 @@
-alias: Protocol Protocol Completed
+alias: Protocol Protoco Completed
 triggers:
   - entity_id: input_boolean.protocol_protocol
     to: "off"
