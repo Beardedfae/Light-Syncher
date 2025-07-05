@@ -1,0 +1,18 @@
+alias: Protocol Protocol Activated
+description: ""
+triggers:
+  - entity_id: input_boolean.protocol_protocol
+    to: "on"
+    trigger: state
+actions:
+  - data:
+      scene_id: before_protocol_protocol
+      snapshot_entities:
+        - light.front_light_light_2
+    action: scene.create
+  - data:
+      entity_id: light.front_light_light_2
+      color_name: purple
+      brightness: 255
+    action: light.turn_on
+mode: single
