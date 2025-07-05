@@ -1,18 +1,21 @@
 alias: Protocol Protocol Activated
-description: ""
+description: Keeps front light locked to purple while protocol_protocol is on
 triggers:
-  - entity_id: input_boolean.protocol_protocol
-    to: "on"
+  - entity_id:
+      - light.front_light_light_2
+      - input_boolean.protocol_protocol
     trigger: state
+conditions:
+  - condition: state
+    entity_id: input_boolean.protocol_protocol
+    state: "on"
 actions:
   - data:
-      scene_id: before_protocol_protocol
-      snapshot_entities:
-        - light.front_light_light_2
-    action: scene.create
-  - data:
       entity_id: light.front_light_light_2
-      color_name: purple
+      rgb_color:
+        - 128
+        - 0
+        - 128
       brightness: 255
     action: light.turn_on
-mode: single
+mode: restart
